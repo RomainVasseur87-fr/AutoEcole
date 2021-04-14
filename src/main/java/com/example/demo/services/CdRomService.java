@@ -19,7 +19,7 @@ public class CdRomService {
 	@Autowired
 	private ICdRomDao cdRomDao;
 	
-	public List<CdRom> getAll() {
+	public List<CdRom> findAll() {
 		return this.cdRomDao.findAll();
 	}
 	
@@ -37,11 +37,21 @@ public class CdRomService {
 	}
 	
 	public CdRom uptade(@RequestBody CdRom cdRom) {
+		if (!cdRomDao.existsById(cdRom.getCdRomId())) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a jour");
+		}
 		return this.cdRomDao.save(cdRom);
 	}
 	
 	public void delete(@PathVariable Long id) {
+		if (!cdRomDao.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a supprimer");
+		}
 		this.cdRomDao.deleteById(id);
+		
+		if (cdRomDao.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "la suppression du cd a echouer");
+		}
 	}
 
 }
