@@ -2,20 +2,31 @@ package com.example.demo.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public abstract class Personne {
 	
+	@Id
+	@GeneratedValue
 	private Long id;
+	@Column(name="civilite")
 	private Civilite civilite;
+	@Column(name="nom")
 	private String nom;
+	@Column(name="prenom")
 	private String prenom;
-	private Adresse adresse;
+	@Column(name="adresse")
+	private String adresse;
+	@Column(name="Date de naissance")
 	private Date dateNaissance;
 	
 	
 	public Personne() {
 		super();
 	}
-	public Personne(Civilite civilite, String nom, String prenom, Adresse adresse, Date dateNaissance) {
+	public Personne(Civilite civilite, String nom, String prenom, String adresse, Date dateNaissance) {
 		super();
 		this.civilite = civilite;
 		this.nom = nom;
@@ -23,7 +34,7 @@ public abstract class Personne {
 		this.adresse = adresse;
 		this.dateNaissance = dateNaissance;
 	}
-	public Personne(Long id, Civilite civilite, String nom, String prenom, Adresse adresse, Date dateNaissance) {
+	public Personne(Long id, Civilite civilite, String nom, String prenom, String adresse, Date dateNaissance) {
 		super();
 		this.id = id;
 		this.civilite = civilite;
@@ -56,10 +67,10 @@ public abstract class Personne {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public Adresse getAdresse() {
+	public String getAdresse() {
 		return adresse;
 	}
-	public void setAdresse(Adresse adresse) {
+	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
 	public Date getDateNaissance() {

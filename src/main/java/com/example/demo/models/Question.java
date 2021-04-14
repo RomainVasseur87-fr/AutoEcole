@@ -1,11 +1,25 @@
 package com.example.demo.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Question")
 public class Question {
 	
+	@Id
+	@GeneratedValue
 	private Long questionId;
+	@Column(name="intitule")
 	private String intitule;
+	@Column(name="reponse")
 	private String reponse;
+	@Column(name="difficulte")
 	private Difficulte difficulte;
+	@Column(name="theme")
 	private Theme theme;
 	
 	public Question() {

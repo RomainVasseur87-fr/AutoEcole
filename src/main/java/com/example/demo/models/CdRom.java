@@ -1,22 +1,38 @@
 package com.example.demo.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "CdRom")
 public class CdRom {
 	
+	@Id
+	@GeneratedValue
 	private Long CdRomId;
+	@Column(name="Editeur")
 	private String Editeur;
+	@Column(name="Serie")
+	private SerieCD[] seriesCD;
 	
 	public CdRom() {
 		super();
 	}
-	public CdRom(String editeur) {
+	public CdRom(String editeur, SerieCD[] seriesCD) {
 		super();
 		Editeur = editeur;
+		this.seriesCD = seriesCD;
 	}
-	public CdRom(Long cdRomId, String editeur) {
+	public CdRom(Long cdRomId, String editeur, SerieCD[] seriesCD) {
 		super();
 		CdRomId = cdRomId;
 		Editeur = editeur;
+		this.seriesCD = seriesCD;
 	}
+	
 	public Long getCdRomId() {
 		return CdRomId;
 	}
@@ -29,40 +45,11 @@ public class CdRom {
 	public void setEditeur(String editeur) {
 		Editeur = editeur;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((CdRomId == null) ? 0 : CdRomId.hashCode());
-		result = prime * result + ((Editeur == null) ? 0 : Editeur.hashCode());
-		return result;
+	public SerieCD[] getSeriesCD() {
+		return seriesCD;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CdRom other = (CdRom) obj;
-		if (CdRomId == null) {
-			if (other.CdRomId != null)
-				return false;
-		} else if (!CdRomId.equals(other.CdRomId))
-			return false;
-		if (Editeur == null) {
-			if (other.Editeur != null)
-				return false;
-		} else if (!Editeur.equals(other.Editeur))
-			return false;
-		return true;
-	}
-	@Override
-	public String toString() {
-		return "CdRom [CdRomId=" + CdRomId + ", Editeur=" + Editeur + "]";
+	public void setSeriesCD(SerieCD[] seriesCD) {
+		this.seriesCD = seriesCD;
 	}
 	
-	
-
 }
