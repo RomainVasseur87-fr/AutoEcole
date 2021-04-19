@@ -1,9 +1,12 @@
 package com.example.demo.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,9 +16,12 @@ public class SerieContenu {
 	@Id
 	@GeneratedValue
 	private Long serieContenuId;
-	@Column(name="seriCD")
+	@OneToOne(mappedBy = "serieContenu")
 	private SerieCD serie;
-	@Column(name="questions")
+	@ManyToOne
+	@JoinTable(name="questions",
+			joinColumns = @JoinColumn(name="serieContenuId"),
+			inverseJoinColumns = @JoinColumn(name = "questionId"))
 	private Question[] questions;
 	
 	public SerieContenu() {

@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,10 +15,13 @@ public class CdRom {
 	
 	@Id
 	@GeneratedValue
-	private Long CdRomId;
+	private Long cdRomId;
 	@Column(name="Editeur")
-	private String Editeur;
-	@Column(name="Serie")
+	private String editeur;
+	@OneToMany
+	@JoinTable (name="Series",
+		joinColumns = @JoinColumn(name="cdRomId"),
+		inverseJoinColumns = @JoinColumn(name = "serieCdId"))
 	private SerieCD[] seriesCD;
 	
 	public CdRom() {
@@ -23,27 +29,27 @@ public class CdRom {
 	}
 	public CdRom(String editeur, SerieCD[] seriesCD) {
 		super();
-		Editeur = editeur;
+		this.editeur = editeur;
 		this.seriesCD = seriesCD;
 	}
 	public CdRom(Long cdRomId, String editeur, SerieCD[] seriesCD) {
 		super();
-		CdRomId = cdRomId;
-		Editeur = editeur;
+		this.cdRomId = cdRomId;
+		this.editeur = editeur;
 		this.seriesCD = seriesCD;
 	}
 	
 	public Long getCdRomId() {
-		return CdRomId;
+		return this.cdRomId;
 	}
 	public void setCdRomId(Long cdRomId) {
-		CdRomId = cdRomId;
+		this.cdRomId = cdRomId;
 	}
 	public String getEditeur() {
-		return Editeur;
+		return this.editeur;
 	}
 	public void setEditeur(String editeur) {
-		Editeur = editeur;
+		this.editeur = editeur;
 	}
 	public SerieCD[] getSeriesCD() {
 		return seriesCD;
