@@ -1,60 +1,65 @@
 package com.example.demo.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="Question")
+@Table(name="question")
 public class Question {
 	
 	@Id
 	@GeneratedValue
-	private Long questionId;
+	private Long id;
 	@Column(name="intitule")
 	private String intitule;
 	@Column(name="reponse")
 	private String reponse;
 	@Column(name="difficulte")
 	private Difficulte difficulte;
+	@Enumerated (EnumType.STRING)
 	@Column(name="theme")
 	private Theme theme;
-	@ManyToOne
-	@JoinTable(name="serieContenu",
-			joinColumns = @JoinColumn(name="questionId"),
-			inverseJoinColumns = @JoinColumn(name = "serieContenuId"))
-	private SerieContenu serieContenu;
+	/*
+	@ManyToMany (mappedBy = "questions" )
+	*/
+	@Transient
+	private List<SerieContenu> seriesContenu = new ArrayList<>();
 	
 	public Question() {
 		super();
 	}
-	public Question(String intitule, String reponse, Difficulte difficulte, Theme theme, SerieContenu serieContenu) {
+	public Question(String intitule, String reponse, Difficulte difficulte, Theme theme, List<SerieContenu> seriesContenu) {
 		super();
 		this.intitule = intitule;
 		this.reponse = reponse;
 		this.difficulte = difficulte;
 		this.theme = theme;
-		this.serieContenu= serieContenu;
+		this.seriesContenu= seriesContenu;
 	}
-	public Question(Long questionId, String intitule, String reponse, Difficulte difficulte, Theme theme,SerieContenu serieContenu) {
+	public Question(Long id, String intitule, String reponse, Difficulte difficulte, Theme theme,List<SerieContenu> seriesContenu) {
 		super();
-		this.questionId = questionId;
+		this.id = id;
 		this.intitule = intitule;
 		this.reponse = reponse;
 		this.difficulte = difficulte;
 		this.theme = theme;
-		this.serieContenu= serieContenu;
+		this.seriesContenu= seriesContenu;
 	}
-	public Long getQuestionId() {
-		return questionId;
+	public Long getId() {
+		return id;
 	}
-	public void setQuestionId(Long questionId) {
-		this.questionId = questionId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getIntitule() {
 		return intitule;
@@ -80,11 +85,11 @@ public class Question {
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
-	public SerieContenu getSerieContenu() {
-		return serieContenu;
+	public List<SerieContenu> getSerieContenu() {
+		return seriesContenu;
 	}
-	public void setSerieContenu(SerieContenu serieContenu) {
-		this.serieContenu = serieContenu;
+	public void setSerieContenu(List<SerieContenu> seriesContenu) {
+		this.seriesContenu = seriesContenu;
 	}
 	
 }

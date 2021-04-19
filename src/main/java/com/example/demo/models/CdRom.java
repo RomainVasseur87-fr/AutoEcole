@@ -1,49 +1,52 @@
 package com.example.demo.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "CdRom")
+@Table(name = "cdRom")
 public class CdRom {
 	
 	@Id
 	@GeneratedValue
-	private Long cdRomId;
+	private Long id;
 	@Column(name="Editeur")
 	private String editeur;
-	@OneToMany
-	@JoinTable (name="Series",
-		joinColumns = @JoinColumn(name="cdRomId"),
-		inverseJoinColumns = @JoinColumn(name = "serieCdId"))
-	private SerieCD[] seriesCD;
+	/*
+	@ManyToMany (mappedBy = "cdRoms")
+	*/
+	@Transient
+	private List<SerieCD> seriesCD = new ArrayList<>();
+	
 	
 	public CdRom() {
 		super();
 	}
-	public CdRom(String editeur, SerieCD[] seriesCD) {
+	public CdRom(String editeur, List<SerieCD> seriesCD) {
 		super();
 		this.editeur = editeur;
 		this.seriesCD = seriesCD;
 	}
-	public CdRom(Long cdRomId, String editeur, SerieCD[] seriesCD) {
+	public CdRom(Long id, String editeur, List<SerieCD> seriesCD) {
 		super();
-		this.cdRomId = cdRomId;
+		this.id = id;
 		this.editeur = editeur;
 		this.seriesCD = seriesCD;
 	}
 	
-	public Long getCdRomId() {
-		return this.cdRomId;
+	public Long getId() {
+		return this.id;
 	}
-	public void setCdRomId(Long cdRomId) {
-		this.cdRomId = cdRomId;
+	public void setid(Long id) {
+		this.id = id;
 	}
 	public String getEditeur() {
 		return this.editeur;
@@ -51,10 +54,10 @@ public class CdRom {
 	public void setEditeur(String editeur) {
 		this.editeur = editeur;
 	}
-	public SerieCD[] getSeriesCD() {
+	public List<SerieCD> getSeriesCD() {
 		return seriesCD;
 	}
-	public void setSeriesCD(SerieCD[] seriesCD) {
+	public void setSeriesCD(List<SerieCD> seriesCD) {
 		this.seriesCD = seriesCD;
 	}
 	

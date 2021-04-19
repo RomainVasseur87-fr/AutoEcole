@@ -50,7 +50,7 @@ public class CdRomController {
 	@PutMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
 	public CdRom update(@RequestBody CdRom cdRom, @PathVariable Long id) {
-		if (!id.equals(cdRom.getCdRomId())) {
+		if (!id.equals(cdRom.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver le CdRom recherche");
 		}
 		cdRom = cdRomService.uptade(cdRom);

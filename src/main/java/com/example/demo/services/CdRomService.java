@@ -37,7 +37,7 @@ public class CdRomService {
 	}
 	
 	public CdRom uptade(@RequestBody CdRom cdRom) {
-		if (!cdRomDao.existsById(cdRom.getCdRomId())) {
+		if (!cdRomDao.existsById(cdRom.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a jour");
 		}
 		return this.cdRomDao.save(cdRom);

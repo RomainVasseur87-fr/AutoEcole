@@ -1,48 +1,55 @@
 package com.example.demo.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="Serie Contenu")
+@Table(name="serieContenu")
 public class SerieContenu {
 	
 	@Id
 	@GeneratedValue
-	private Long serieContenuId;
+	private Long id;
 	@OneToOne(mappedBy = "serieContenu")
 	private SerieCD serie;
-	@ManyToOne
-	@JoinTable(name="questions",
-			joinColumns = @JoinColumn(name="serieContenuId"),
-			inverseJoinColumns = @JoinColumn(name = "questionId"))
-	private Question[] questions;
+	/*
+	@ManyToMany
+	@JoinTable(name="serieContenu-question",
+			joinColumns = @JoinColumn(name="serieContenu_id"),
+			inverseJoinColumns = @JoinColumn(name = "question_id"))
+	*/
+	@Transient
+	private List<Question> questions = new ArrayList<>();
 	
 	public SerieContenu() {
 		super();
 	}
-	public SerieContenu(SerieCD serie, Question[] questions) {
+	public SerieContenu(SerieCD serie, List<Question> questions) {
 		super();
 		this.serie = serie;
 		this.questions = questions;
 	}
-	public SerieContenu(Long serieContenuId, SerieCD serie, Question[] questions) {
+	public SerieContenu(Long id, SerieCD serie, List<Question> questions) {
 		super();
-		this.serieContenuId = serieContenuId;
+		this.id = id;
 		this.serie = serie;
 		this.questions = questions;
 	}
-	public Long getSerieContenuId() {
-		return serieContenuId;
+	public Long getId() {
+		return id;
 	}
-	public void setSerieContenuId(Long serieContenuId) {
-		this.serieContenuId = serieContenuId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public SerieCD getSerie() {
 		return serie;
@@ -50,10 +57,10 @@ public class SerieContenu {
 	public void setSerie(SerieCD serie) {
 		this.serie = serie;
 	}
-	public Question[] getQuestions() {
+	public List<Question> getQuestions() {
 		return questions;
 	}
-	public void setQuestions(Question[] questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
