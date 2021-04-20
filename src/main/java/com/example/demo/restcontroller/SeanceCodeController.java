@@ -1,7 +1,6 @@
 package com.example.demo.restcontroller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,54 +14,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.example.demo.models.CdRom;
-import com.example.demo.services.CdRomService;
+import com.example.demo.models.SeanceCode;
+import com.example.demo.services.SeanceCodeService;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/api/CdRom")
-public class CdRomController {
-	
+@RequestMapping("/api/seanceCode")
+public class SeanceCodeController {
+
 	@Autowired
-	private CdRomService cdRomService;
+	private SeanceCodeService seanceCodeService;
 	
 	@GetMapping("")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<CdRom> findAll() {
-		return this.cdRomService.findAll();
+	public List<SeanceCode> findAll() {
+		return this.seanceCodeService.findAll();
 	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public CdRom find(@PathVariable Long id) {
-		return this.cdRomService.findById(id);
+	public SeanceCode find(@PathVariable Long id) {
+		return this.seanceCodeService.findById(id);
 
 	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public CdRom create(@RequestBody CdRom cdRom) {
-		return this.cdRomService.create(cdRom);
+	public SeanceCode create(@RequestBody SeanceCode seanceCode) {
+		return this.seanceCodeService.create(seanceCode);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public CdRom update(@RequestBody CdRom cdRom, @PathVariable Long id) {
-		if (!id.equals(cdRom.getId())) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver le CdRom recherche");
+	public SeanceCode update(@RequestBody SeanceCode seanceCode, @PathVariable Long id) {
+		if (!id.equals(seanceCode.getId())) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver la seance de code recherche");
 		}
-		return this.cdRomService.uptade(cdRom);
+		return this.seanceCodeService.uptade(seanceCode);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
 	public void delete(@PathVariable Long id) {
-		if (cdRomService.findById(id).equals(null)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a supprimer");
+		if (seanceCodeService.findById(id).equals(null)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver la Seance de code a mettre a supprimer");
 		}
-		cdRomService.delete(id);
-
+		seanceCodeService.delete(id);
 	}
 
 }
+

@@ -1,7 +1,6 @@
 package com.example.demo.restcontroller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,54 +14,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.example.demo.models.CdRom;
-import com.example.demo.services.CdRomService;
+import com.example.demo.models.Client;
+import com.example.demo.services.ClientService;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/api/CdRom")
-public class CdRomController {
-	
+@RequestMapping("/api/client")
+public class ClientController {
 	@Autowired
-	private CdRomService cdRomService;
+	private ClientService clientService;
 	
 	@GetMapping("")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<CdRom> findAll() {
-		return this.cdRomService.findAll();
+	public List<Client> findAll() {
+		return this.clientService.findAll();
 	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public CdRom find(@PathVariable Long id) {
-		return this.cdRomService.findById(id);
+	public Client find(@PathVariable Long id) {
+		return this.clientService.findById(id);
 
 	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public CdRom create(@RequestBody CdRom cdRom) {
-		return this.cdRomService.create(cdRom);
+	public Client create(@RequestBody Client client) {
+		return this.clientService.create(client);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public CdRom update(@RequestBody CdRom cdRom, @PathVariable Long id) {
-		if (!id.equals(cdRom.getId())) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver le CdRom recherche");
+	public Client update(@RequestBody Client client, @PathVariable Long id) {
+		if (!id.equals(client.getId())) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver le client recherche");
 		}
-		return this.cdRomService.uptade(cdRom);
+		return this.clientService.uptade(client);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
 	public void delete(@PathVariable Long id) {
-		if (cdRomService.findById(id).equals(null)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a supprimer");
+		if (clientService.findById(id).equals(null)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le client a mettre a supprimer");
 		}
-		cdRomService.delete(id);
-
+		clientService.delete(id);
 	}
 
 }

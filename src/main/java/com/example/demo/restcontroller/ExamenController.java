@@ -1,7 +1,6 @@
 package com.example.demo.restcontroller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,54 +14,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.example.demo.models.CdRom;
-import com.example.demo.services.CdRomService;
+import com.example.demo.models.Examen;
+import com.example.demo.services.ExamenService;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/api/CdRom")
-public class CdRomController {
+@RequestMapping("/api/examen")
+public class ExamenController {
 	
 	@Autowired
-	private CdRomService cdRomService;
+	private ExamenService examenService;
 	
 	@GetMapping("")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<CdRom> findAll() {
-		return this.cdRomService.findAll();
+	public List<Examen> findAll() {
+		return this.examenService.findAll();
 	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public CdRom find(@PathVariable Long id) {
-		return this.cdRomService.findById(id);
+	public Examen find(@PathVariable Long id) {
+		return this.examenService.findById(id);
 
 	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public CdRom create(@RequestBody CdRom cdRom) {
-		return this.cdRomService.create(cdRom);
+	public Examen create(@RequestBody Examen examen) {
+		return this.examenService.create(examen);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public CdRom update(@RequestBody CdRom cdRom, @PathVariable Long id) {
-		if (!id.equals(cdRom.getId())) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver le CdRom recherche");
+	public Examen update(@RequestBody Examen examen, @PathVariable Long id) {
+		if (!id.equals(examen.getId())) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver l examen recherche");
 		}
-		return this.cdRomService.uptade(cdRom);
+		return this.examenService.uptade(examen);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
 	public void delete(@PathVariable Long id) {
-		if (cdRomService.findById(id).equals(null)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a supprimer");
+		if (examenService.findById(id).equals(null)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver l examen a mettre a supprimer");
 		}
-		cdRomService.delete(id);
-
+		examenService.delete(id);
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.example.demo.restcontroller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,54 +14,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.example.demo.models.CdRom;
-import com.example.demo.services.CdRomService;
+import com.example.demo.models.SerieCd;
+import com.example.demo.services.SerieCdService;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/api/CdRom")
-public class CdRomController {
-	
+@RequestMapping("/api/serieCd")
+public class SerieCdController {
 	@Autowired
-	private CdRomService cdRomService;
+	private SerieCdService serieCdService;
 	
 	@GetMapping("")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<CdRom> findAll() {
-		return this.cdRomService.findAll();
+	public List<SerieCd> findAll() {
+		return this.serieCdService.findAll();
 	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public CdRom find(@PathVariable Long id) {
-		return this.cdRomService.findById(id);
+	public SerieCd find(@PathVariable Long id) {
+		return this.serieCdService.findById(id);
 
 	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public CdRom create(@RequestBody CdRom cdRom) {
-		return this.cdRomService.create(cdRom);
+	public SerieCd create(@RequestBody SerieCd serieCd) {
+		return this.serieCdService.create(serieCd);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public CdRom update(@RequestBody CdRom cdRom, @PathVariable Long id) {
-		if (!id.equals(cdRom.getId())) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver le CdRom recherche");
+	public SerieCd update(@RequestBody SerieCd serieCd, @PathVariable Long id) {
+		if (!id.equals(serieCd.getId())) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver la SerieCd recherche");
 		}
-		return this.cdRomService.uptade(cdRom);
+		return this.serieCdService.uptade(serieCd);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
 	public void delete(@PathVariable Long id) {
-		if (cdRomService.findById(id).equals(null)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a supprimer");
+		if (serieCdService.findById(id).equals(null)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver la SerieCd a mettre a supprimer");
 		}
-		cdRomService.delete(id);
-
+		serieCdService.delete(id);
 	}
 
 }
+
