@@ -32,6 +32,10 @@ public class CdRomService {
 		}
 	}
 	
+	public List<CdRom> findByEditeur (String editeur){
+		return this.cdRomDao.findByEditeur(editeur);
+	}
+	
 	public CdRom create(@RequestBody CdRom cdRom) {
 		return this.cdRomDao.save(cdRom);
 	}

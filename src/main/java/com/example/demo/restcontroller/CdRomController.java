@@ -39,6 +39,13 @@ public class CdRomController {
 		return this.cdRomService.findById(id);
 
 	}
+	
+	@GetMapping("/editeur/{editeur}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<CdRom> findByEditeur(@PathVariable String editeur){
+		return this.cdRomService.findByEditeur(editeur);
+		
+	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
