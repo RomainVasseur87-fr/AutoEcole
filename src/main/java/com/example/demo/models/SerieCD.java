@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +18,8 @@ public class SerieCd {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@OneToOne
-	@JoinColumn (name = "cdRom_id")
+	@ManyToOne
+	@JoinTable(name = "series", joinColumns = @JoinColumn(name = "serieCd_id"), inverseJoinColumns = @JoinColumn(name = "cdRom_id") )
 	private CdRom cdRom;
 	@ManyToMany
 	@JoinTable(name = "questions", joinColumns = @JoinColumn(name = "serieCd_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
