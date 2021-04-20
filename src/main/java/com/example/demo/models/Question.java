@@ -1,59 +1,48 @@
 package com.example.demo.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Table(name="question")
+@Table(name = "question")
 public class Question {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(name="intitule")
+	@Column (name = "intitule")
 	private String intitule;
-	@Column(name="reponse")
+	@Column (name = "reponse")
 	private String reponse;
-	@Column(name="difficulte")
-	private Difficulte difficulte;
+	@Column (name = "difficulte")
 	@Enumerated (EnumType.STRING)
-	@Column(name="theme")
+	private Difficulte difficulte;
+	@Column (name = "theme")
+	@Enumerated (EnumType.STRING)
 	private Theme theme;
-	/*
-	@ManyToMany (mappedBy = "questions" )
-	*/
-	@Transient
-	private List<SerieContenu> seriesContenu = new ArrayList<>();
 	
 	public Question() {
 		super();
 	}
-	public Question(String intitule, String reponse, Difficulte difficulte, Theme theme, List<SerieContenu> seriesContenu) {
+	public Question(String intitule, String reponse, Difficulte difficulte, Theme theme) {
 		super();
 		this.intitule = intitule;
 		this.reponse = reponse;
 		this.difficulte = difficulte;
 		this.theme = theme;
-		this.seriesContenu= seriesContenu;
 	}
-	public Question(Long id, String intitule, String reponse, Difficulte difficulte, Theme theme,List<SerieContenu> seriesContenu) {
+	public Question(Long id, String intitule, String reponse, Difficulte difficulte, Theme theme) {
 		super();
 		this.id = id;
 		this.intitule = intitule;
 		this.reponse = reponse;
 		this.difficulte = difficulte;
 		this.theme = theme;
-		this.seriesContenu= seriesContenu;
 	}
 	public Long getId() {
 		return id;
@@ -85,11 +74,7 @@ public class Question {
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
-	public List<SerieContenu> getSerieContenu() {
-		return seriesContenu;
-	}
-	public void setSerieContenu(List<SerieContenu> seriesContenu) {
-		this.seriesContenu = seriesContenu;
-	}
 	
+	
+
 }

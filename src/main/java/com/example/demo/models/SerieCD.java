@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,75 +10,52 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Table(name="serieCd")
-public class SerieCD {
+@Table (name = "serieCd")
+public class SerieCd {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
-	/*
-	@ManyToMany
-	@JoinTable(name="Cdrom-Series",
-			joinColumns = @JoinColumn(name="serieCd_id"),
-			inverseJoinColumns = @JoinColumn(name = "cdRom_id"))
-	*/
-	@Transient
-	private List<CdRom> cdRoms = new ArrayList<>();
 	@OneToOne
-	@JoinColumn(name = "serieContenu_id")
-	private SerieContenu serieContenu;
-	/*
+	@JoinColumn (name = "cdRom_id")
+	private CdRom cdRom;
 	@ManyToMany
-	@JoinTable(name="seance-serie",
-			joinColumns = @JoinColumn(name="serieCd_id"),
-			inverseJoinColumns = @JoinColumn(name = "seanceCode_id"))
-	*/
-	@Transient
-	private List<SeanceCode> seances = new ArrayList<>();
+	@JoinTable(name = "questions", joinColumns = @JoinColumn(name = "serieCd_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
+	private List<Question> questions;
 	
-	public SerieCD() {
+	public SerieCd() {
 		super();
 	}
-	public SerieCD(List<CdRom> cdRoms,SerieContenu serieContenu,List<SeanceCode> seances ) {
+	public SerieCd(CdRom cdRom, List<Question> questions) {
 		super();
-		this.cdRoms = cdRoms;
-		this.serieContenu = serieContenu;
-		this.seances = seances;
+		this.cdRom = cdRom;
+		this.questions = questions;
 	}
-	public SerieCD(Long id, List<CdRom> cdRoms, SerieContenu serieContenu,List<SeanceCode> seances) {
+	public SerieCd(Long id, CdRom cdRom, List<Question> questions) {
 		super();
 		this.id = id;
-		this.cdRoms = cdRoms;
-		this.serieContenu = serieContenu;
-		this.seances = seances;
+		this.cdRom = cdRom;
+		this.questions = questions;
 	}
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<CdRom> getCdRoms() {
-		return cdRoms;
+	public CdRom getCdRom() {
+		return cdRom;
 	}
-	public void setCdRoms(List<CdRom> cdRoms) {
-		this.cdRoms = cdRoms;
+	public void setCdRom(CdRom cdRom) {
+		this.cdRom = cdRom;
 	}
-	public SerieContenu getSerieContenu() {
-		return serieContenu;
+	public List<Question> getQuestions() {
+		return questions;
 	}
-	public void setSerieContenu(SerieContenu serieContenu) {
-		this.serieContenu = serieContenu;
-	}
-	public List<SeanceCode> getSeances() {
-		return seances;
-	}
-	public void setSeances(List<SeanceCode> seances) {
-		this.seances = seances;
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 	
 	

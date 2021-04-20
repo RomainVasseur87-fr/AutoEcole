@@ -30,8 +30,7 @@ public class CdRomController {
 	@GetMapping("")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<CdRom> findAll() {
-		List<CdRom> cdRoms = this.cdRomService.findAll();
-		return cdRoms;
+		return this.cdRomService.findAll();
 	}
 
 	@GetMapping("/{id}")
