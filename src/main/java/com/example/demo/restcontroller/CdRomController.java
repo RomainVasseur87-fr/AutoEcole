@@ -21,7 +21,7 @@ import com.example.demo.services.CdRomService;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/api/CdRom")
+@RequestMapping("/api/cdRom")
 public class CdRomController {
 	
 	@Autowired

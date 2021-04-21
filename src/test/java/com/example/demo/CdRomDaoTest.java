@@ -1,5 +1,5 @@
 package com.example.demo;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,21 +20,21 @@ class CdRomDaoTest {
 	@Test
 	private void cdRomFindByEditeur() {
 		int startSize = cdRomDao.findByEditeur("rapido").size();
-		CdRom cdRom1 = new CdRom("Rapido");
+		CdRom cdRom1 = new CdRom("Rapido",null);
 		cdRom1 = cdRomDao.save(cdRom1);
 		int endSize = cdRomDao.findByEditeur("rapido").size();
-		Assertions.assertEquals(1, endSize-startSize);
+		assertEquals(1, endSize-startSize);
 	}
 	@Test
 	private void cdRomFindBySerieCd() {
 		SerieCd serie1 = new SerieCd ();
 		serie1 = serieCdDao.save(serie1);
 		int startSize = cdRomDao.findBySerieCd(serie1.getId()).size();
-		CdRom cdRom1 = new CdRom("Rapido");
+		CdRom cdRom1 = new CdRom("Rapido",null);
 		cdRom1.getSeriesCd().add(serie1);
 		cdRom1 = cdRomDao.save(cdRom1);
 		int endSize = cdRomDao.findBySerieCd(serie1.getId()).size();
-		Assertions.assertEquals(1, endSize-startSize);
+		assertEquals(1, endSize-startSize);
 	}
 	
 

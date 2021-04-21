@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,29 +18,38 @@ public class CdRom {
 	private Long id;
 	@Column (name = "editeur")
 	private String editeur;
-	@OneToMany(mappedBy = "cdRom")
+	@ManyToMany(mappedBy = "cdRoms")
 	private List<SerieCd> seriesCd;
 	
-	
+	/**
+	 * contructeur de cdRom sans parrametre
+	 */
 	public CdRom() {
 		super();
 	}
-	public CdRom(String editeur) {
+	/**
+	 * Constructeur de CdRom sans id avec ces parrametres
+	 * @param editeur du cdRom
+	 * @param seriesCd liste des serieCd que le cdrom contient
+	 */
+	public CdRom(String editeur, List<SerieCd> seriesCd) {
 		super();
 		this.editeur = editeur;
+		this.seriesCd = seriesCd;
 	}
-	public CdRom(Long id, String editeur) {
-		super();
-		this.id = id;
-		this.editeur = editeur;
-	}
-	
+	/**
+	 * Constructeur de cdRom avec tous ces parrametres
+	 * @param id du cdRom
+	 * @param editeur du cdRom
+	 * @param seriesCd liste des serieCd que le cdrom contient
+	 */
 	public CdRom(Long id, String editeur, List<SerieCd> seriesCd) {
 		super();
 		this.id = id;
 		this.editeur = editeur;
 		this.seriesCd = seriesCd;
 	}
+	
 	public Long getId() {
 		return id;
 	}

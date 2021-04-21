@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,9 +17,9 @@ public class SerieCd {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@ManyToOne
+	@ManyToMany
 	@JoinTable(name = "series", joinColumns = @JoinColumn(name = "serieCd_id"), inverseJoinColumns = @JoinColumn(name = "cdRom_id") )
-	private CdRom cdRom;
+	private List<CdRom> cdRoms;
 	@ManyToMany
 	@JoinTable(name = "questions", joinColumns = @JoinColumn(name = "serieCd_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
 	private List<Question> questions;
@@ -33,12 +32,12 @@ public class SerieCd {
 	}
 	/**
 	 * Constructeur de serieCd sans id avec ces parrametres
-	 * @param cdRom contenant cette serie
+	 * @param cdRoms list des cdRom contenant cette serie
 	 * @param questions contenus dans cette serie
 	 */
-	public SerieCd(CdRom cdRom, List<Question> questions) {
+	public SerieCd(List<CdRom> cdRoms, List<Question> questions) {
 		super();
-		this.cdRom = cdRom;
+		this.cdRoms = cdRoms;
 		this.questions = questions;
 	}
 	/**
@@ -47,10 +46,10 @@ public class SerieCd {
 	 * @param cdRom contenant cette serie
 	 * @param questions contenus dans cette serie
 	 */
-	public SerieCd(Long id, CdRom cdRom, List<Question> questions) {
+	public SerieCd(Long id, List<CdRom> cdRoms, List<Question> questions) {
 		super();
 		this.id = id;
-		this.cdRom = cdRom;
+		this.cdRoms = cdRoms;
 		this.questions = questions;
 	}
 	
@@ -60,11 +59,12 @@ public class SerieCd {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public CdRom getCdRom() {
-		return cdRom;
+	
+	public List<CdRom> getCdRoms() {
+		return cdRoms;
 	}
-	public void setCdRom(CdRom cdRom) {
-		this.cdRom = cdRom;
+	public void setCdRoms(List<CdRom> cdRoms) {
+		this.cdRoms = cdRoms;
 	}
 	public List<Question> getQuestions() {
 		return questions;
