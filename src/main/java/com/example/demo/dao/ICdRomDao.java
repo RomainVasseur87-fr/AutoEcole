@@ -12,5 +12,10 @@ public interface ICdRomDao extends JpaRepository<CdRom, Long> {
 	
 	@Query("select c from CdRom c where c.editeur =:editeur")
 	List<CdRom> findByEditeur (@Param("editeur")String editeur);
+	
+	
+	@Query("select c from CdRom c left join fetch c.seriesCd s where s.id =:id")
+	List<CdRom> findBySerieCd (@Param("id")Long id);
+	
 
 }

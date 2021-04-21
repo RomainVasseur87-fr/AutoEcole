@@ -57,6 +57,9 @@ public class CdRom {
 		return seriesCd;
 	}
 	public void setSeriesCd(List<SerieCd> seriesCd) {
+		if (seriesCd.size()>6) {
+			throw new RuntimeException("un cdRom ne peut contenir que 6 series");
+		}
 		this.seriesCd = seriesCd;
 	}
 	

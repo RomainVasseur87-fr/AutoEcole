@@ -35,9 +35,19 @@ public class Examen {
 	@JoinColumn (name = "serieCd_id")
 	private SerieCd serieCd;
 	
+	/**
+	 * Constructeur d'examen sans parrametre
+	 */
 	public Examen() {
 		super();
 	}
+	/**
+	 * Constructeur d'examen sans id avec ces parrametres
+	 * @param date de l'examen
+	 * @param heure de l'examen
+	 * @param clients participants a l'examen
+	 * @param serieCd utilisee pour l'examen
+	 */
 	public Examen(Date date, Date heure, List<Client> clients, SerieCd serieCd) {
 		super();
 		this.date = date;
@@ -46,6 +56,14 @@ public class Examen {
 		this.serieCd = serieCd;
 	}
 	
+	/**
+	 * Constructeur d'examen avec tous ces parrametres
+	 * @param id de l'examen
+	 * @param date de l'examen
+	 * @param heure de l'examen
+	 * @param clients participants a l'examen
+	 * @param serieCd utilisee pour l'examen
+	 */
 	public Examen(Long id, Date date, Date heure, List<Client> clients, SerieCd serieCd) {
 		super();
 		this.id = id;
@@ -76,6 +94,9 @@ public class Examen {
 		return clients;
 	}
 	public void setClients(List<Client> clients) {
+		if (clients.size()>8) {
+			throw new RuntimeException("l'examen ne peut acceuillr que 8 candidats maximum");
+		}
 		this.clients = clients;
 	}
 	public SerieCd getSerieCd() {

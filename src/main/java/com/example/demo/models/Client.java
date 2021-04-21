@@ -1,11 +1,15 @@
 package com.example.demo.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,26 +30,51 @@ public class Client {
 	@Temporal(TemporalType.DATE) 
 	@Column (name = "datedeNaissance")
 	private Date dateDeNaissance;
+	@ManyToMany
+	@JoinTable(name = "scores", joinColumns = @JoinColumn(name = "client_id"), inverseJoinColumns = @JoinColumn(name = "score_id"))
+	private List<Score> scores;
 	
+	/**
+	 * constructeur de cliet sans parrametre
+	 */
 	public Client() {
 		super();
 	}
 
-	public Client(String nom, String prenom, String adresse, Date dateDeNaissance) {
+	/**
+	 * Constructeur de client sans id avec ces parrametres
+	 * @param nom
+	 * @param prenom
+	 * @param adresse
+	 * @param dateDeNaissance
+	 * @param scores obtenus par le client
+	 */
+	public Client(String nom, String prenom, String adresse, Date dateDeNaissance, List<Score> scores) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
 		this.dateDeNaissance = dateDeNaissance;
+		this.scores = scores;
 	}
 
-	public Client(Long id, String nom, String prenom, String adresse, Date dateDeNaissance) {
+	/**
+	 * Constructeur de client avec tous ces parrametres
+	 * @param id du client
+	 * @param nom
+	 * @param prenom
+	 * @param adresse
+	 * @param dateDeNaissance
+	 * @param scores obtenus par le client
+	 */
+	public Client(Long id, String nom, String prenom, String adresse, Date dateDeNaissance, List<Score> scores) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
 		this.dateDeNaissance = dateDeNaissance;
+		this.scores = scores;
 	}
 
 	public Long getId() {
@@ -86,6 +115,14 @@ public class Client {
 
 	public void setDateDeNaissance(Date dateDeNaissance) {
 		this.dateDeNaissance = dateDeNaissance;
+	}
+
+	public List<Score> getScores() {
+		return scores;
+	}
+
+	public void setScores(List<Score> scores) {
+		this.scores = scores;
 	}
 	
 	

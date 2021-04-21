@@ -36,13 +36,23 @@ public class CdRomService {
 		return this.cdRomDao.findByEditeur(editeur);
 	}
 	
+	public List<CdRom> findBySerieCd (Long id){
+		return this.cdRomDao.findBySerieCd(id);
+	}
+	
+	
 	public CdRom create(@RequestBody CdRom cdRom) {
+		if (cdRom.getSeriesCd().size()>6) {
+			throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "Le cdRom ne peut contenir que 6 series");
+		}
 		return this.cdRomDao.save(cdRom);
 	}
 	
 	public CdRom uptade(@RequestBody CdRom cdRom) {
 		if (!cdRomDao.existsById(cdRom.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a jour");
+		} else if (cdRom.getSeriesCd().size()>6) {
+			throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "Le cdRom ne peut contenir que 6 series");
 		}
 		return this.cdRomDao.save(cdRom);
 	}

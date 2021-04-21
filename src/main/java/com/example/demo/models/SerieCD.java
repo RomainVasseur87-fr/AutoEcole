@@ -25,20 +25,35 @@ public class SerieCd {
 	@JoinTable(name = "questions", joinColumns = @JoinColumn(name = "serieCd_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
 	private List<Question> questions;
 	
+	/**
+	 * Constructeur de serieCd sans parrametre
+	 */
 	public SerieCd() {
 		super();
 	}
+	/**
+	 * Constructeur de serieCd sans id avec ces parrametres
+	 * @param cdRom contenant cette serie
+	 * @param questions contenus dans cette serie
+	 */
 	public SerieCd(CdRom cdRom, List<Question> questions) {
 		super();
 		this.cdRom = cdRom;
 		this.questions = questions;
 	}
+	/**
+	 * Constructeur de serieCd avec tous ces parrametres
+	 * @param id de cette serie
+	 * @param cdRom contenant cette serie
+	 * @param questions contenus dans cette serie
+	 */
 	public SerieCd(Long id, CdRom cdRom, List<Question> questions) {
 		super();
 		this.id = id;
 		this.cdRom = cdRom;
 		this.questions = questions;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +70,9 @@ public class SerieCd {
 		return questions;
 	}
 	public void setQuestions(List<Question> questions) {
+		if (questions.size()>40) {
+			throw new RuntimeException("une serie ne contient que 40 questions");
+		}
 		this.questions = questions;
 	}
 	

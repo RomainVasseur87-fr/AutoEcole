@@ -26,9 +26,19 @@ public class Question {
 	@Enumerated (EnumType.STRING)
 	private Theme theme;
 	
+	/**
+	 * Constructeur de question sans parrametre
+	 */
 	public Question() {
 		super();
 	}
+	/**
+	 * Constructeur de question sans id avec ces parramtres
+	 * @param intitule de la question
+	 * @param reponse de la question
+	 * @param difficulte de la question
+	 * @param theme de la question
+	 */
 	public Question(String intitule, String reponse, Difficulte difficulte, Theme theme) {
 		super();
 		this.intitule = intitule;
@@ -36,6 +46,14 @@ public class Question {
 		this.difficulte = difficulte;
 		this.theme = theme;
 	}
+	/**
+	 * Constructeur de question avec tous ces parramtres
+	 * @param id de la question
+	 * @param intitule de la question
+	 * @param reponse de la question
+	 * @param difficulte de la question
+	 * @param theme de la question
+	 */
 	public Question(Long id, String intitule, String reponse, Difficulte difficulte, Theme theme) {
 		super();
 		this.id = id;

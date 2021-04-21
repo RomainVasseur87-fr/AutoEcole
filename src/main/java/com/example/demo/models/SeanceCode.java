@@ -34,11 +34,19 @@ public class SeanceCode {
 	@OneToOne
 	@JoinColumn (name = "serieCd_id")
 	private SerieCd serieCd;
-	
+	/**
+	 * contructeur sans parametre de seanceCode
+	 */
 	public SeanceCode() {
 		super();
 	}
-
+	/**
+	 * constructeur de seanceCode sans le parrametre id
+	 * @param date de la seance
+	 * @param heure de la seance
+	 * @param clients liste des participants a cette seance
+	 * @param serieCd serie utilisee pour cette seance
+	 */
 	public SeanceCode(Date date, Date heure, List<Client> clients, SerieCd serieCd) {
 		super();
 		this.date = date;
@@ -47,6 +55,14 @@ public class SeanceCode {
 		this.serieCd = serieCd;
 	}
 
+	/**
+	 * constructeur de seance Code avec tous ces parrametres
+	 * @param id de la seance
+	 * @param date de la seance
+	 * @param heure de la seance
+	 * @param clients liste des participants a cette seance
+	 * @param serieCd serie utilisee pour cette seance
+	 */
 	public SeanceCode(Long id, Date date, Date heure, List<Client> clients, SerieCd serieCd) {
 		super();
 		this.id = id;

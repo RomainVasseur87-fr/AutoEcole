@@ -32,12 +32,17 @@ public class SerieCdService {
 	}
 	
 	public SerieCd create(@RequestBody SerieCd serieCd) {
+		if (serieCd.getQuestions().size()>40) {
+			throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "La serie ne peut contenir que 40 questions");
+		}
 		return this.serieCdDao.save(serieCd);
 	}
 	
 	public SerieCd uptade(@RequestBody SerieCd serieCd) {
 		if (!serieCdDao.existsById(serieCd.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a jour");
+		} else if (serieCd.getQuestions().size()>40) {
+			throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "La serie ne peut contenir que 40 questions");
 		}
 		return this.serieCdDao.save(serieCd);
 	}
