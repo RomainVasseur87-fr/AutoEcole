@@ -1,5 +1,6 @@
 package com.example.demo.restcontroller;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +36,28 @@ public class SeanceCodeController {
 	@ResponseStatus(code = HttpStatus.OK)
 	public SeanceCode find(@PathVariable Long id) {
 		return this.seanceCodeService.findById(id);
-
 	}
+	@GetMapping("/date/{date}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<SeanceCode> findByDate(Date date) {
+		return this.seanceCodeService.findByDate(date);
+	}
+	@GetMapping("/heure/{heure}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<SeanceCode> findByHeure(Date heure) {
+		return this.seanceCodeService.findByHeure(heure);
+	}
+	@GetMapping("/client/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<SeanceCode> findByClient(@PathVariable Long id) {
+		return this.seanceCodeService.findByClient(id);
+	}
+	@GetMapping("/serieCd/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public SeanceCode findBySerieCd(@PathVariable Long id) {
+		return this.seanceCodeService.findBySerieCd(id);
+	}
+	
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)

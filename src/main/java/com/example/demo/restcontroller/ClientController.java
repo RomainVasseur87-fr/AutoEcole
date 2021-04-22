@@ -36,6 +36,42 @@ public class ClientController {
 		return this.clientService.findById(id);
 
 	}
+	@GetMapping("/nom/{nom}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Client> findByNom(@PathVariable String nom) {
+		return this.clientService.findByNom(nom);
+	}
+	@GetMapping("/prenom/{prenom}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Client> findByPrenom(@PathVariable String prenom) {
+		return this.clientService.findByPrenom(prenom);
+	}
+	@GetMapping("/adresse/{adresse}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Client> findByAdresse(@PathVariable String adresse) {
+		return this.clientService.findByAdresse(adresse);
+	}
+	@GetMapping("/score/{score}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Client> findByScore(@PathVariable Integer score) {
+		return this.clientService.findByScore(score);
+	}
+	@GetMapping("/scoreInf/{scoreInf}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Client> findByScoreInf(@PathVariable Integer scoreInf) {
+		return this.clientService.findByScoreInf(scoreInf);
+	}
+	@GetMapping("/scoreSup/{scoreSup}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Client> findByScoreSup(@PathVariable Integer scoreSup) {
+		return this.clientService.findByScoreSup(scoreSup);
+	}
+	@GetMapping("/moyenne/{clientId}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public Integer findMoyenne(@PathVariable Long id) {
+		return this.clientService.findMoyenne(id);
+
+	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)

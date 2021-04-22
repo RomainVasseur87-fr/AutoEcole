@@ -5,8 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 import com.example.demo.dao.IScoreDao;
 import com.example.demo.models.Score;
@@ -30,14 +28,14 @@ public class ScoreService {
 		}
 	}
 	
-	public Score create(@RequestBody Score score) {
+	public Score create(Score score) {
 		if (score.getScore()>40) {
 			throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "Le score ne peut pas depasser 40");
 		}
 		return this.scoreDao.save(score);
 	}
 	
-	public Score uptade(@RequestBody Score score) {
+	public Score uptade(Score score) {
 		if (!scoreDao.existsById(score.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le score a mettre a jour");
 		} else if (score.getScore()>40) {
@@ -46,7 +44,7 @@ public class ScoreService {
 		return this.scoreDao.save(score);
 	}
 	
-	public void delete(@PathVariable Long id) {
+	public void delete(Long id) {
 		if (!scoreDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le score a mettre a supprimer");
 		}

@@ -22,9 +22,9 @@ public interface IClientDao extends JpaRepository<Client, Long> {
 	List<Client> findByScore (@Param("score")Integer score);
 	
 	@Query("select c from Client c left join fetch c.scores s where s.score <= :scoreInf")
-	List<Client> findByPrixInf (@Param("scoreInf") Integer scoreInf);
+	List<Client> findByScoreInf (@Param("scoreInf") Integer scoreInf);
 	
 	@Query("select c from Client c left join fetch c.scores s where s.score >= :scoreSup")
-	List<Client> findByPrixSup (@Param("scoreSup") Integer scoreSup);
+	List<Client> findByScoreSup (@Param("scoreSup") Integer scoreSup);
 
 }

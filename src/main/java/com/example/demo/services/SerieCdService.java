@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 import com.example.demo.dao.ISerieCdDao;
 import com.example.demo.models.SerieCd;
@@ -30,15 +28,21 @@ public class SerieCdService {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
+	public List<SerieCd> findByCdRom(Long id) {
+		return this.serieCdDao.findByCdRom(id);
+	}
+	public List<SerieCd> findByQuestion(Long id) {
+		return this.serieCdDao.findByQuestion(id);
+	}
 	
-	public SerieCd create(@RequestBody SerieCd serieCd) {
+	public SerieCd create(SerieCd serieCd) {
 		if (serieCd.getQuestions().size()>40) {
 			throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "La serie ne peut contenir que 40 questions");
 		}
 		return this.serieCdDao.save(serieCd);
 	}
 	
-	public SerieCd uptade(@RequestBody SerieCd serieCd) {
+	public SerieCd uptade(SerieCd serieCd) {
 		if (!serieCdDao.existsById(serieCd.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a jour");
 		} else if (serieCd.getQuestions().size()>40) {
@@ -47,7 +51,7 @@ public class SerieCdService {
 		return this.serieCdDao.save(serieCd);
 	}
 	
-	public void delete(@PathVariable Long id) {
+	public void delete(Long id) {
 		if (!serieCdDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a supprimer");
 		}

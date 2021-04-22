@@ -37,6 +37,26 @@ public class QuestionController {
 		return this.questionService.findById(id);
 
 	}
+	@GetMapping("/intitule/{intitule}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Question> findByIntitule(@PathVariable String intitule) {
+		return this.questionService.findByIntitule(intitule);
+	}
+	@GetMapping("/reponse/{reponse}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Question> findByReponse(@PathVariable String reponse) {
+		return this.questionService.findByIntitule(reponse);
+	}
+	@GetMapping("/difficulte/{difficulte}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Question> findByDifficulte(@PathVariable String difficulte) {
+		return this.questionService.findByDifficulte(difficulte);
+	}
+	@GetMapping("/theme/{theme}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Question> findByTheme(@PathVariable String theme) {
+		return this.questionService.findByTheme(theme);
+	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)

@@ -1,5 +1,6 @@
 package com.example.demo.restcontroller;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,28 @@ public class ExamenController {
 	@ResponseStatus(code = HttpStatus.OK)
 	public Examen find(@PathVariable Long id) {
 		return this.examenService.findById(id);
+
+	}
+	
+	@GetMapping("/date/{date}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Examen> findDate(@PathVariable Date date) {
+		return this.examenService.findByDate(date);
+	}
+	@GetMapping("/heure/{heure}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Examen> findHeure(@PathVariable Date heure) {
+		return this.examenService.findByHeure(heure);
+	}
+	@GetMapping("/client/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Examen> findClient(@PathVariable Long id) {
+		return this.examenService.findByClient(id);
+	}
+	@GetMapping("/serieCd/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public Examen findBySerieCd(@PathVariable Long id) {
+		return this.examenService.findBySerieCd(id);
 
 	}
 

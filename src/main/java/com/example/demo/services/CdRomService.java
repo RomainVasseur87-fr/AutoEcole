@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.dao.ICdRomDao;
@@ -41,14 +39,14 @@ public class CdRomService {
 	}
 	
 	
-	public CdRom create(@RequestBody CdRom cdRom) {
+	public CdRom create(CdRom cdRom) {
 		if (cdRom.getSeriesCd().size()>6) {
 			throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "Le cdRom ne peut contenir que 6 series");
 		}
 		return this.cdRomDao.save(cdRom);
 	}
 	
-	public CdRom uptade(@RequestBody CdRom cdRom) {
+	public CdRom uptade(CdRom cdRom) {
 		if (!cdRomDao.existsById(cdRom.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a jour");
 		} else if (cdRom.getSeriesCd().size()>6) {
@@ -57,7 +55,7 @@ public class CdRomService {
 		return this.cdRomDao.save(cdRom);
 	}
 	
-	public void delete(@PathVariable Long id) {
+	public void delete(Long id) {
 		if (!cdRomDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a supprimer");
 		}

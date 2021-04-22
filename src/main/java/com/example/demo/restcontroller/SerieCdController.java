@@ -36,6 +36,16 @@ public class SerieCdController {
 		return this.serieCdService.findById(id);
 
 	}
+	@GetMapping("/cdRom/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<SerieCd> findByCdRom(@PathVariable Long id) {
+		return this.serieCdService.findByCdRom(id);
+	}
+	@GetMapping("/question/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<SerieCd> findByQuestion(@PathVariable Long id) {
+		return this.serieCdService.findByQuestion(id);
+	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
