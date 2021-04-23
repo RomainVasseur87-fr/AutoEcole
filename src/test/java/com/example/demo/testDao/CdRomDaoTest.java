@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.testDao;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,20 +20,19 @@ class CdRomDaoTest {
 	private ISerieCdDao serieCdDao;
 	
 	@Test
-	private void cdRomFindByEditeur() {
-		int startSize = cdRomDao.findByEditeur("rapido").size();
+	public void cdRomFindByEditeur() {
+		int startSize = cdRomDao.findByEditeur("Rapido").size();
 		CdRom cdRom1 = new CdRom("Rapido",null);
 		cdRom1 = cdRomDao.save(cdRom1);
-		int endSize = cdRomDao.findByEditeur("rapido").size();
+		int endSize = cdRomDao.findByEditeur("Rapido").size();
 		assertEquals(1, endSize-startSize);
 	}
 	@Test
-	private void cdRomFindBySerieCd() {
+	public void cdRomFindBySerieCd() {
 		SerieCd serie1 = new SerieCd ();
 		serie1 = serieCdDao.save(serie1);
 		int startSize = cdRomDao.findBySerieCd(serie1.getId()).size();
-		CdRom cdRom1 = new CdRom("Rapido",null);
-		cdRom1.getSeriesCd().add(serie1);
+		CdRom cdRom1 = new CdRom("Rapido",List.of(serie1));
 		cdRom1 = cdRomDao.save(cdRom1);
 		int endSize = cdRomDao.findBySerieCd(serie1.getId()).size();
 		assertEquals(1, endSize-startSize);
