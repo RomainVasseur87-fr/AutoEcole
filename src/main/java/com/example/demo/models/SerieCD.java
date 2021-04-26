@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class SerieCd {
 	private List<CdRom> cdRoms;
 	@ManyToMany
 	@JoinTable(name = "questions", joinColumns = @JoinColumn(name = "serieCd_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
-	private List<Question> questions;
+	private Map<Integer,Question> questions;
 	
 	/**
 	 * Constructeur de serieCd sans parrametre
@@ -35,7 +36,7 @@ public class SerieCd {
 	 * @param cdRoms list des cdRom contenant cette serie
 	 * @param questions contenus dans cette serie
 	 */
-	public SerieCd(List<CdRom> cdRoms, List<Question> questions) {
+	public SerieCd(List<CdRom> cdRoms, Map<Integer,Question> questions) {
 		super();
 		this.cdRoms = cdRoms;
 		this.questions = questions;
@@ -46,7 +47,7 @@ public class SerieCd {
 	 * @param cdRom contenant cette serie
 	 * @param questions contenus dans cette serie
 	 */
-	public SerieCd(Long id, List<CdRom> cdRoms, List<Question> questions) {
+	public SerieCd(Long id, List<CdRom> cdRoms, Map<Integer,Question> questions) {
 		super();
 		this.id = id;
 		this.cdRoms = cdRoms;
@@ -66,15 +67,17 @@ public class SerieCd {
 	public void setCdRoms(List<CdRom> cdRoms) {
 		this.cdRoms = cdRoms;
 	}
-	public List<Question> getQuestions() {
+	public Map<Integer,Question> getQuestions() {
 		return questions;
 	}
-	public void setQuestions(List<Question> questions) {
+	
+	public void setQuestions(Map<Integer, Question> questions) {
 		if (questions.size()>40) {
 			throw new RuntimeException("une serie ne contient que 40 questions");
 		}
 		this.questions = questions;
 	}
+	
 	
 	
 

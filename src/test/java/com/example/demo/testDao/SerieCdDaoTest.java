@@ -2,6 +2,8 @@ package com.example.demo.testDao;
 
 
 import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ class SerieCdDaoTest {
 		Question question1 = new Question("Quel est le muscle?", "d la reponse d",null,null);
 		question1 = questionDao.save(question1);
 		int startSize = serieCdDao.findByQuestion(question1.getId()).size();
-		SerieCd serieA = new SerieCd(null, List.of(question1));
+		SerieCd serieA = new SerieCd(null, Map.of(1,question1));
 		serieA = serieCdDao.save(serieA);
 		int endSize = serieCdDao.findByQuestion(question1.getId()).size();
 		Assertions.assertEquals(1, endSize-startSize);
