@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +73,8 @@ public class SerieCd {
 	}
 	
 	public void setQuestions(Map<Integer, Question> questions) {
-		if (questions.size()>40) {
+		List<Integer> listKey = new ArrayList<Integer>(questions.keySet());
+		if (listKey.size()>40) {
 			throw new RuntimeException("une serie ne contient que 40 questions");
 		}
 		this.questions = questions;
