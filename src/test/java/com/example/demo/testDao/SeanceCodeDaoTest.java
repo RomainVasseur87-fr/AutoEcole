@@ -11,6 +11,8 @@ import com.example.demo.dao.IClientDao;
 import com.example.demo.dao.ISeanceCodeDao;
 import com.example.demo.dao.ISerieCdDao;
 import com.example.demo.models.Client;
+import com.example.demo.models.Examen;
+import com.example.demo.models.Personne;
 import com.example.demo.models.SeanceCode;
 import com.example.demo.models.SerieCd;
 
@@ -27,8 +29,9 @@ class SeanceCodeDaoTest {
 	public void SeanceCodeFindByDate() {
 		Date date = new Date();
 		int startSize = seanceCodeDao.findByDate(date).size();
-		SeanceCode seance1 = new SeanceCode(date, null,null,null);
-		seance1 = seanceCodeDao.save(seance1);
+		Examen seance1 = new SeanceCode();
+		seance1.setDate(date);
+		seance1 = seanceCodeDao.save((SeanceCode)seance1);
 		int endSize = seanceCodeDao.findByDate(date).size();
 		Assertions.assertEquals(1, endSize-startSize);
 	}
@@ -37,8 +40,10 @@ class SeanceCodeDaoTest {
 		Date date = new Date();
 		Date heure = new Date();
 		int startSize = seanceCodeDao.findByHeure(heure).size();
-		SeanceCode seance2 = new SeanceCode(date, heure,null,null);
-		seance2 = seanceCodeDao.save(seance2);
+		Examen seance2 = new SeanceCode();
+		seance2.setDate(date);
+		seance2.setHeure(heure);
+		seance2 = seanceCodeDao.save((SeanceCode)seance2);
 		int endSize = seanceCodeDao.findByHeure(heure).size();
 		Assertions.assertEquals(1, endSize-startSize);
 	}
@@ -48,11 +53,18 @@ class SeanceCodeDaoTest {
 		Date date = new Date();
 		Date heure = new Date();
 		Date dateNaissance = new Date();
-		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", dateNaissance,null);
-		randomGuy1 = clientDao.save(randomGuy1);
+		Personne randomGuy1 = new Client(null);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(dateNaissance);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy1);
 		int startSize = seanceCodeDao.findByClient(randomGuy1.getId()).size();
-		SeanceCode seance3 = new SeanceCode(date, heure,List.of(randomGuy1),null);
-		seance3 = seanceCodeDao.save(seance3);
+		Examen seance3 = new SeanceCode();
+		seance3.setDate(date);
+		seance3.setHeure(heure);
+		seance3.setClients(List.of((Client)randomGuy1));
+		seance3 = seanceCodeDao.save((SeanceCode)seance3);
 		int endSize = seanceCodeDao.findByClient(randomGuy1.getId()).size();
 		Assertions.assertEquals(1, endSize-startSize);
 	}
@@ -62,8 +74,11 @@ class SeanceCodeDaoTest {
 		Date heure = new Date();
 		SerieCd serieA = new SerieCd();
 		serieA = serieCdDao.save(serieA);
-		SeanceCode seance4 = new SeanceCode(date, heure,null,serieA);
-		seance4 = seanceCodeDao.save(seance4);
+		Examen seance4 = new SeanceCode();
+		seance4.setDate(date);
+		seance4.setHeure(heure);
+		seance4.setSerieCd(serieA);
+		seance4 = seanceCodeDao.save((SeanceCode)seance4);
 		SeanceCode seanceFind = seanceCodeDao.findBySerieCd(serieA.getId()).get();
 		
 		Assertions.assertEquals(serieA, seanceFind.getSerieCd());

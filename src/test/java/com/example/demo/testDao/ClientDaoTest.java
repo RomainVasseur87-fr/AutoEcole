@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.demo.dao.IClientDao;
 import com.example.demo.dao.IScoreDao;
 import com.example.demo.models.Client;
+import com.example.demo.models.Personne;
 import com.example.demo.models.Score;
 
 @SpringBootTest
@@ -23,8 +24,12 @@ class ClientDaoTest {
 	public void ClientFindByNom() {
 		int startSize = clientDao.findByNom("Bidulle").size();
 		Date date = new Date();
-		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", date,null);
-		randomGuy1 = clientDao.save(randomGuy1);
+		Personne randomGuy1 = new Client(null);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(date);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy1);
 		int endSize = clientDao.findByNom("Bidulle").size();
 		assertEquals(1, endSize-startSize);
 	}
@@ -32,8 +37,12 @@ class ClientDaoTest {
 	public void ClientFindByPrenom() {
 		int startSize = clientDao.findByPrenom("bob").size();
 		Date date = new Date();
-		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", date,null);
-		randomGuy1 = clientDao.save(randomGuy1);
+		Personne randomGuy1 = new Client(null);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(date);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy1);
 		int endSize = clientDao.findByPrenom("bob").size();
 		assertEquals(1, endSize-startSize);
 	}
@@ -41,8 +50,12 @@ class ClientDaoTest {
 	public void ClientFindByAdresse() {
 		int startSize = clientDao.findByAdresse("12 rue nullpart").size();
 		Date date = new Date();
-		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", date,null);
-		randomGuy1 = clientDao.save(randomGuy1);
+		Personne randomGuy1 = new Client(null);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(date);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy1);
 		int endSize = clientDao.findByAdresse("12 rue nullpart").size();
 		assertEquals(1, endSize-startSize);
 	}
@@ -57,8 +70,12 @@ class ClientDaoTest {
 		Score result3 = new Score(42);
 		result3 = scoreDao.save(result3);
 		List<Score> scores = List.of(result1,result2,result3);
-		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", date,scores);
-		randomGuy1 = clientDao.save(randomGuy1);
+		Personne randomGuy1 = new Client(scores);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(date);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy1);
 		int endSize = clientDao.findByScore(33).size();
 		assertEquals(1, endSize-startSize);
 	}
@@ -73,11 +90,19 @@ class ClientDaoTest {
 		Score result3 = new Score(42);
 		result3 = scoreDao.save(result3);
 		List<Score> scores = List.of(result1,result2,result3);
-		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", date,scores);
-		randomGuy1 = clientDao.save(randomGuy1);
+		Personne randomGuy1 = new Client(scores);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(date);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy1);
 		List<Score> scoresInf = List.of(result3, result3);
-		Client randomGuy2 = new Client("Bidulle", "truc", "12 rue nullpart", date,scoresInf);
-		randomGuy2 = clientDao.save(randomGuy2);
+		Personne randomGuy2 = new Client(scoresInf);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(date);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy2);;
 		int endSize = clientDao.findByScoreInf(33).size();
 		assertEquals(1, endSize-startSize);
 	}
@@ -92,11 +117,19 @@ class ClientDaoTest {
 		Score result3 = new Score(42);
 		result3 = scoreDao.save(result3);
 		List<Score> scores = List.of(result1,result2,result3);
-		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", date,scores);
-		randomGuy1 = clientDao.save(randomGuy1);
+		Personne randomGuy1 = new Client(scores);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(date);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy1);
 		List<Score> scoresSup = List.of(result1, result1);
-		Client randomGuy2 = new Client("Bidulle", "truc", "12 rue nullpart", date,scoresSup);
-		randomGuy2 = clientDao.save(randomGuy2);
+		Personne randomGuy2 = new Client(scoresSup);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(date);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy2);
 		int endSize = clientDao.findByScoreSup(33).size();
 		assertEquals(1, endSize-startSize);
 	}

@@ -10,7 +10,9 @@ import com.example.demo.dao.IClientDao;
 import com.example.demo.dao.IExamenDao;
 import com.example.demo.dao.ISerieCdDao;
 import com.example.demo.models.Client;
+import com.example.demo.models.Examen;
 import com.example.demo.models.ExamenCode;
+import com.example.demo.models.Personne;
 import com.example.demo.models.SerieCd;
 
 @SpringBootTest
@@ -27,8 +29,9 @@ class ExamenDaoTest {
 	public void ExamenFindByDate() {
 		Date date = new Date();
 		int startSize = examenDao.findByDate(date).size();
-		ExamenCode exam1 = new ExamenCode(date, null,null,null);
-		exam1 = examenDao.save(exam1);
+		Examen exam1 = new ExamenCode();
+		exam1.setDate(date);
+		exam1 = examenDao.save((ExamenCode)exam1);
 		int endSize = examenDao.findByDate(date).size();
 		Assertions.assertEquals(1, endSize-startSize);
 	}
@@ -37,8 +40,10 @@ class ExamenDaoTest {
 		Date date = new Date();
 		Date heure = new Date();
 		int startSize = examenDao.findByHeure(heure).size();
-		ExamenCode exam1 = new ExamenCode(date, heure,null,null);
-		exam1 = examenDao.save(exam1);
+		Examen exam1 = new ExamenCode();
+		exam1.setDate(date);
+		exam1.setHeure(heure);
+		exam1 = examenDao.save((ExamenCode)exam1);
 		int endSize = examenDao.findByHeure(heure).size();
 		Assertions.assertEquals(1, endSize-startSize);
 	}
@@ -48,11 +53,18 @@ class ExamenDaoTest {
 		Date date = new Date();
 		Date heure = new Date();
 		Date dateNaissance = new Date();
-		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", dateNaissance,null);
-		randomGuy1 = clientDao.save(randomGuy1);
+		Personne randomGuy1 = new Client(null);
+		randomGuy1.setNom("Bidulle");
+		randomGuy1.setPrenom("bob");
+		randomGuy1.setDateDeNaissance(dateNaissance);
+		randomGuy1.setAdresse("12 rue nullpart");
+		randomGuy1 = clientDao.save((Client)randomGuy1);
 		int startSize = examenDao.findByClient(randomGuy1.getId()).size();
-		ExamenCode exam1 = new ExamenCode(date, heure,List.of(randomGuy1),null);
-		exam1 = examenDao.save(exam1);
+		Examen exam1 = new ExamenCode();
+		exam1.setClients(List.of((Client)randomGuy1));
+		exam1.setDate(date);
+		exam1.setHeure(heure);
+		exam1 = examenDao.save((ExamenCode)exam1);
 		int endSize = examenDao.findByClient(randomGuy1.getId()).size();
 		Assertions.assertEquals(1, endSize-startSize);
 	}
@@ -62,8 +74,11 @@ class ExamenDaoTest {
 		Date heure = new Date();
 		SerieCd serieA = new SerieCd();
 		serieA = serieCdDao.save(serieA);
-		ExamenCode exam1 = new ExamenCode(date, heure,null,serieA);
-		exam1 = examenDao.save(exam1);
+		Examen exam1 = new ExamenCode();
+		exam1.setSerieCd(serieA);
+		exam1.setDate(date);
+		exam1.setHeure(heure);
+		exam1 = examenDao.save((ExamenCode)exam1);
 		ExamenCode examFind = examenDao.findBySerieCd(serieA.getId()).get();
 		
 		Assertions.assertEquals(serieA, examFind.getSerieCd());
