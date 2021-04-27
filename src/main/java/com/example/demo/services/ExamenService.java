@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import com.example.demo.dao.IExamenDao;
-import com.example.demo.models.Examen;
+import com.example.demo.models.ExamenCode;
 
 @Service
 public class ExamenService {
@@ -17,39 +17,39 @@ public class ExamenService {
 	@Autowired
 	private IExamenDao examenDao;
 	
-	public List<Examen> findAll() {
+	public List<ExamenCode> findAll() {
 		return this.examenDao.findAll();
 	}
 	
-	public Examen findById (Long id) {
-		Optional<Examen> optExamen = this.examenDao.findById(id);
+	public ExamenCode findById (Long id) {
+		Optional<ExamenCode> optExamen = this.examenDao.findById(id);
 		if (optExamen.isPresent()) {
 			return optExamen.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
-	public List<Examen> findByDate(Date date) {
+	public List<ExamenCode> findByDate(Date date) {
 		return this.examenDao.findByDate(date);
 	}
-	public List<Examen> findByHeure(Date heure) {
+	public List<ExamenCode> findByHeure(Date heure) {
 		return this.examenDao.findByHeure(heure);
 	}
-	public List<Examen> findByClient(Long id) {
+	public List<ExamenCode> findByClient(Long id) {
 		return this.examenDao.findByClient(id);
 	}
-	public Examen findBySerieCd(Long id) {
+	public ExamenCode findBySerieCd(Long id) {
 		if (!examenDao.findBySerieCd(id).isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver l'examen qui presente cette serieCd");
 		}
 		return this.examenDao.findBySerieCd(id).get();
 	}
 	
-	public Examen create(Examen examen) {
+	public ExamenCode create(ExamenCode examen) {
 		return this.examenDao.save(examen);
 	}
 	
-	public Examen uptade(Examen examen) {
+	public ExamenCode uptade(ExamenCode examen) {
 		if (!examenDao.existsById(examen.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "impossible de trouver le cd a mettre a jour");
 		}

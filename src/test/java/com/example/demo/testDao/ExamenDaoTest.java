@@ -10,7 +10,7 @@ import com.example.demo.dao.IClientDao;
 import com.example.demo.dao.IExamenDao;
 import com.example.demo.dao.ISerieCdDao;
 import com.example.demo.models.Client;
-import com.example.demo.models.Examen;
+import com.example.demo.models.ExamenCode;
 import com.example.demo.models.SerieCd;
 
 @SpringBootTest
@@ -27,7 +27,7 @@ class ExamenDaoTest {
 	public void ExamenFindByDate() {
 		Date date = new Date();
 		int startSize = examenDao.findByDate(date).size();
-		Examen exam1 = new Examen(date, null,null,null);
+		ExamenCode exam1 = new ExamenCode(date, null,null,null);
 		exam1 = examenDao.save(exam1);
 		int endSize = examenDao.findByDate(date).size();
 		Assertions.assertEquals(1, endSize-startSize);
@@ -37,7 +37,7 @@ class ExamenDaoTest {
 		Date date = new Date();
 		Date heure = new Date();
 		int startSize = examenDao.findByHeure(heure).size();
-		Examen exam1 = new Examen(date, heure,null,null);
+		ExamenCode exam1 = new ExamenCode(date, heure,null,null);
 		exam1 = examenDao.save(exam1);
 		int endSize = examenDao.findByHeure(heure).size();
 		Assertions.assertEquals(1, endSize-startSize);
@@ -51,7 +51,7 @@ class ExamenDaoTest {
 		Client randomGuy1 = new Client("Bidulle", "bob", "12 rue nullpart", dateNaissance,null);
 		randomGuy1 = clientDao.save(randomGuy1);
 		int startSize = examenDao.findByClient(randomGuy1.getId()).size();
-		Examen exam1 = new Examen(date, heure,List.of(randomGuy1),null);
+		ExamenCode exam1 = new ExamenCode(date, heure,List.of(randomGuy1),null);
 		exam1 = examenDao.save(exam1);
 		int endSize = examenDao.findByClient(randomGuy1.getId()).size();
 		Assertions.assertEquals(1, endSize-startSize);
@@ -62,9 +62,9 @@ class ExamenDaoTest {
 		Date heure = new Date();
 		SerieCd serieA = new SerieCd();
 		serieA = serieCdDao.save(serieA);
-		Examen exam1 = new Examen(date, heure,null,serieA);
+		ExamenCode exam1 = new ExamenCode(date, heure,null,serieA);
 		exam1 = examenDao.save(exam1);
-		Examen examFind = examenDao.findBySerieCd(serieA.getId()).get();
+		ExamenCode examFind = examenDao.findBySerieCd(serieA.getId()).get();
 		
 		Assertions.assertEquals(serieA, examFind.getSerieCd());
 	}

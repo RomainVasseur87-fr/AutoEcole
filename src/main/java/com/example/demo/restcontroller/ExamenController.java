@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import com.example.demo.models.Examen;
+import com.example.demo.models.ExamenCode;
 import com.example.demo.services.ExamenService;
 
 @CrossOrigin("http://localhost:4200")
@@ -28,48 +28,48 @@ public class ExamenController {
 	
 	@GetMapping("")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Examen> findAll() {
+	public List<ExamenCode> findAll() {
 		return this.examenService.findAll();
 	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public Examen find(@PathVariable Long id) {
+	public ExamenCode find(@PathVariable Long id) {
 		return this.examenService.findById(id);
 
 	}
 	
 	@GetMapping("/date/{date}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Examen> findDate(@PathVariable Date date) {
+	public List<ExamenCode> findDate(@PathVariable Date date) {
 		return this.examenService.findByDate(date);
 	}
 	@GetMapping("/heure/{heure}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Examen> findHeure(@PathVariable Date heure) {
+	public List<ExamenCode> findHeure(@PathVariable Date heure) {
 		return this.examenService.findByHeure(heure);
 	}
 	@GetMapping("/client/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Examen> findClient(@PathVariable Long id) {
+	public List<ExamenCode> findClient(@PathVariable Long id) {
 		return this.examenService.findByClient(id);
 	}
 	@GetMapping("/serieCd/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public Examen findBySerieCd(@PathVariable Long id) {
+	public ExamenCode findBySerieCd(@PathVariable Long id) {
 		return this.examenService.findBySerieCd(id);
 
 	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public Examen create(@RequestBody Examen examen) {
+	public ExamenCode create(@RequestBody ExamenCode examen) {
 		return this.examenService.create(examen);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public Examen update(@RequestBody Examen examen, @PathVariable Long id) {
+	public ExamenCode update(@RequestBody ExamenCode examen, @PathVariable Long id) {
 		if (!id.equals(examen.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imposssible de trouver l examen recherche");
 		}

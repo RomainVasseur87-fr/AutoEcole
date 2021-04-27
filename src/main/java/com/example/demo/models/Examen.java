@@ -7,16 +7,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "examen")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Examen {
 	
 	@Id
@@ -45,8 +46,8 @@ public class Examen {
 	 * Constructeur d'examen sans id avec ces parrametres
 	 * @param date de l'examen
 	 * @param heure de l'examen
-	 * @param clients participants a l'examen
-	 * @param serieCd utilisee pour l'examen
+	 * @param clients participants à l'examen
+	 * @param serieCd presentee à l'examen
 	 */
 	public Examen(Date date, Date heure, List<Client> clients, SerieCd serieCd) {
 		super();
@@ -55,14 +56,13 @@ public class Examen {
 		this.clients = clients;
 		this.serieCd = serieCd;
 	}
-	
 	/**
 	 * Constructeur d'examen avec tous ces parrametres
-	 * @param id de l'examen
+	 * @param id
 	 * @param date de l'examen
 	 * @param heure de l'examen
-	 * @param clients participants a l'examen
-	 * @param serieCd utilisee pour l'examen
+	 * @param clients participants à l'examen
+	 * @param serieCd presentee à l'examen
 	 */
 	public Examen(Long id, Date date, Date heure, List<Client> clients, SerieCd serieCd) {
 		super();
@@ -72,6 +72,7 @@ public class Examen {
 		this.clients = clients;
 		this.serieCd = serieCd;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -94,9 +95,6 @@ public class Examen {
 		return clients;
 	}
 	public void setClients(List<Client> clients) {
-		if (clients.size()>8) {
-			throw new RuntimeException("l'examen ne peut acceuillr que 8 candidats maximum");
-		}
 		this.clients = clients;
 	}
 	public SerieCd getSerieCd() {
@@ -105,5 +103,7 @@ public class Examen {
 	public void setSerieCd(SerieCd serieCd) {
 		this.serieCd = serieCd;
 	}
+	
+	
 
 }
