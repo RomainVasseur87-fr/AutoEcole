@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "examen")
+@Table(name = "examenCode")
 public class ExamenCode extends Examen {
 	
 	
